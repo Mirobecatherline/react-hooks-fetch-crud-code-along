@@ -13,10 +13,10 @@ function ShoppingList() {
       .then((r) => r.json())
       .then((items) => setItems(items));
   }, []);
-  
+
   function handleDeleteItem(deletedItem) {
     const updatedItems = items.filter((item) => item.id !== deletedItem.id);
-  setItems(updatedItems);
+    setItems(updatedItems);
   }
 
   function handleUpdateItem(updatedItem) {
@@ -28,13 +28,12 @@ function ShoppingList() {
       }
     });
     setItems(updatedItems);
-    console.log("In ShoppingCart:", updatedItem);
   }
-  
+
   function handleAddItem(newItem) {
     setItems([...items, newItem]);
   }
-  
+
   function handleCategoryChange(category) {
     setSelectedCategory(category);
   }
@@ -47,18 +46,23 @@ function ShoppingList() {
 
   return (
     <div className="ShoppingList">
-      <ItemForm OnAddItem={handleAddItem}/>
+      <ItemForm onAddItem={handleAddItem} />
       <Filter
         category={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
-          <Item key={item.id} item={item} onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
+          <Item
+            key={item.id}
+            item={item}
+            onUpdateItem={handleUpdateItem}
+            onDeleteItem={handleDeleteItem}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-export default ShoppingList;
+export default ShoppingList
